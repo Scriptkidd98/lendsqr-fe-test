@@ -84,4 +84,3 @@ cd lendsqr-fe-test
 npm install
 npm run dev
 ```
-# lendsqr-fe-test
