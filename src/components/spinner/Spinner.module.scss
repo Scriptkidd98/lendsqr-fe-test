@@ -1,0 +1,18 @@
+.spinner {
+    width: 12.5px;
+    height: 12.5px;
+    border-width: 2px;
+    border-style: solid;
+    border-bottom-color: white;
+    border-right-color: white;
+    border-left-color: grey;
+    border-top-color: transparent;
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+    100% {
+        transform: rotate(360deg);
+    }
+}

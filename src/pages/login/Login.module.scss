@@ -1,0 +1,210 @@
+@use "../../styles/mixins" as *;
+
+.login_button {
+    background: $primary-light-blue-bg;
+    font-family: Avenir Next;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 100%;
+    letter-spacing: 10%;
+    text-align: center;
+    text-transform: uppercase;
+    border-radius: 8px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    @include flex-center;
+    width: 100%;
+    border: none;
+    color: white;
+    margin-top: 35px;
+    transition: background 0.2s ease-in-out;
+}
+.login_button:hover {
+    background: $primary-light-blue-hover-bg;
+}
+.logo_image {
+    width: 173.76473999023438px;
+    height: 36px;
+    position: absolute;
+    top: 106px;
+    left: 67px;
+    @include respond(mobile) {
+        display: none;
+    }
+}
+.illustration_div {
+    background-color: #FBFBFB;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    @include respond(mobile) {
+        display: none;
+    }
+}
+.illustration_image {
+    max-width: 600px;
+    max-height: 337.56939697265625px;
+    margin-top: 138px;
+}
+.login_main {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    overflow-y: auto;
+    @include respond(mobile) {
+        grid-template-columns: 1fr;
+    }
+}
+.form_section {
+    @include flex-center;
+    position: relative;
+    padding: 0px 40px;
+}
+.login_main,
+.illustration_div,
+.form_section {
+    height: 100vh;
+}
+
+@media (max-width: 1100px) {
+  .form_section {
+    padding: 0px 40px;
+  }
+  .illustration_image {
+    max-width: 385px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+.formWrapper {
+    width: 100%;
+    max-width: 420px;
+}
+h1 {
+    font-family: Avenir Next;
+    font-weight: 700;
+    font-size: 40px;
+    line-height: 100%;
+    letter-spacing: -4%;
+    color: $primary-dark-blue-text;
+}
+p {
+    font-family: Avenir Next;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    color: $primary-gray-text;
+    margin-bottom: 70px;
+}
+input {
+    color: $primary-gray-text;
+    font-family: Avenir Next;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 100%;
+    letter-spacing: 0%;
+}
+label {
+    position: absolute;
+    background-color: #fff;
+    transition: top 0.2s ease, font-size 0.2s ease, color 0.2s ease;
+    left: .75rem;
+    text-transform: initial;
+    color: #091e424f;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 999;
+    pointer-events: none;
+}
+.input_div {
+    position: relative;
+    width: 100%;
+    border: 2px solid rgba(84, 95, 125, 0.15);
+    border-radius: 5px;
+    max-width: 420px;
+    transition: border-color 0.2s ease-in-out;
+}
+.input_div:focus-within {
+    border-color: $primary-light-blue-border;
+}
+.input_div:focus-within label,
+.input_div input:focus + label,
+.input_div input:not(:placeholder-shown) + label {
+    top: -15%;
+    font-size: 12px;
+    transform: translateY(0);
+}
+.input_div:focus-within label,
+.input_div input:focus + label {
+    color: $primary-light-blue-text;
+}
+.input_div input {
+    border: none;
+    outline: none !important;
+    padding: 16px;
+    border-radius: 5px;
+    width: 100%;
+}
+form > .input_div:nth-child(3) {
+    margin-top: 24px;
+}
+.forgot_password_link,
+.show_password_button {
+    color: $primary-light-blue-text;
+    font-family: Avenir Next;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 100%;
+    letter-spacing: 10%;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 2px;
+    padding: 0px;
+}
+.show_password_button {
+    background: none;
+    border: none;
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.mobile_logo {
+  display: none;
+  @include respond(mobile) {
+    display: block;
+    position: absolute;
+    top: 30px;
+    left: 20px;
+    width: 173.76473999023438px;
+    height: 36px;
+  }
+}
+.input_div,
+.input_div input {
+  box-sizing: border-box;
+}
+.error_message {
+    color: $danger-text;
+    font-size: 12px;
+    font-weight: 400;
+    font-family: Avenir Next;
+    min-height: 20px;
+    margin-top: 4px;
+    transition: opacity 0.2s;
+    opacity: 1;
+}
+.error_message:empty {
+  opacity: 0;
+}
+form {
+    display: flex;
+    flex-direction: column;
+}
+.forgot_password_link {
+    margin-top: 24px;
+}
+.login_button:disabled {
+    background: rgba(57, 205, 204, 0.5);
+    cursor: not-allowed;
+}
