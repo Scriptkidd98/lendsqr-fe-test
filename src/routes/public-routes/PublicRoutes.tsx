@@ -1,5 +1,5 @@
-import type { JSX } from 'react';
-import { Navigate } from 'react-router-dom';
+import type { JSX } from "react";
+import { Navigate } from "react-router-dom";
 
 const PublicRoutes = ({ children } : { children: JSX.Element }) => {
     const isAuthenticated = !!localStorage.getItem("auth");

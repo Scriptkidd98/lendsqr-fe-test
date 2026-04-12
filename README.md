@@ -42,6 +42,24 @@ The project is organized for clarity and scalability:
 
 ---
 
+## ✅ Testing
+
+Unit and interaction tests are configured with **Vitest + React Testing Library + JSDOM**.
+
+Run tests:
+
+```bash
+npm run test
+```
+
+Run tests in watch mode:
+
+```bash
+npm run test -- --watch
+```
+
+---
+
 ## Progress Log
 
 ### 2026-04-10
@@ -54,13 +72,12 @@ The project is organized for clarity and scalability:
 - Ensured error messages are clear and do not shift layout
 - All code and styles follow the Figma design and assessment requirements
 
----
-
 **Decisions & Rationale:**
 
 - Used Vite for fast development and TypeScript for type safety.
 - Global SCSS variables via Vite config to avoid repetitive imports.
 - Error handling and layout stability for best UX and pixel-perfect fidelity.
+- React.JSX.Element for route wrappers: wrapper must return a concrete renderable element.
 
 **🧠 UX & Interaction Considerations:**
 
@@ -73,6 +90,48 @@ Some considerations include:
 - Predictable navigation and feedback during user flows
 
 These decisions ensure the interface behaves reliably under real-world usage, not just ideal conditions.
+
+### 2026-04-12
+
+- Built reusable `DashboardLayout` shell (header, side nav, content area)
+- Implemented responsive behavior for top nav and side nav
+- Added hamburger-triggered off-canvas side nav + backdrop for tablet/mobile
+- Added desktop/mobile logo swap by breakpoint
+- Tuned top-nav spacing across breakpoints to preserve visual fidelity
+- Added priority-collapse behavior around 900px (hide Docs link first, preserve core controls)
+- Added outside-click and keyboard-close behavior for user menu
+- Added `Ctrl/Cmd + K` shortcut to focus the search input
+
+**Decisions & Rationale:**
+
+- Kept desktop spacing faithful to Figma and adapted values per breakpoint instead of one fixed margin, to maintain layout integrity across widths.
+- Converted side nav to a drawer below desktop to prevent content squeeze and preserve readability.
+- Used progressive disclosure for top-nav items (non-critical actions collapse earlier) to avoid overlap at medium widths.
+- ReactNode for layout children: layout accepts any renderable child content (elements, strings, fragments, etc.).
+- Link vs a: internal navigation uses Link to avoid full page reload and preserve SPA state; use a only for external URLs.
+
+**🧠 UX & Interaction Considerations:**
+
+While implementing the dashboard, I considered expected interaction behavior in addition to static design fidelity.
+
+Some considerations include:
+
+- User menu close behavior: outside click, `Escape`, and `Tab`
+- `Ctrl/Cmd + K` quick-focus for search
+- Backdrop click to dismiss mobile side nav
+- Auto-close side nav when a nav link is selected (mobile/tablet usability)
+
+These decisions ensure the dashboard remains visually accurate, responsive, and usable across desktop, tablet, and mobile viewports.
+
+**✅ Testing**
+
+Current covered interactions include:
+
+- Dashboard layout renders child content
+- `Ctrl/Cmd + K` focuses dashboard search input
+- Hamburger toggles side nav open/closed
+- Backdrop click closes mobile side nav
+- User menu opens and closes via outside click and `Escape`
 
 ---
 

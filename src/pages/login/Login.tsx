@@ -17,7 +17,7 @@ const Login = () => {
 
   const validateEmailBeforeLogin = () => {
     if(email !== "" && !validateEmail(email)) {
-      setEmailError('Email address is an invalid format');
+      setEmailError("Email address is an invalid format");
     } 
   }
 
@@ -37,7 +37,7 @@ const Login = () => {
     }
 
     if(email && !validateEmail(email)) {
-      setEmailError('Email address is an invalid format');
+      setEmailError("Email address is an invalid format");
     } 
 
     setIsSigningIn(true);
@@ -62,13 +62,13 @@ const Login = () => {
   return (
     <main className={styles.login_main}>
       <div className={styles.illustration_div}>
-        <img className={styles.logo_image} src={logo} alt="logo" />
+        <img className={styles.logo_image} src={logo} alt="logo" height={36} width={173.76}/>
         <img className={styles.illustration_image} src={illustration} alt="" />
       </div>
 
       <section className={styles.form_section}>
         <div className={styles.formWrapper}>
-          <img className={styles.mobile_logo} src={logo} alt="logo" />
+          <img className={styles.mobile_logo} src={logo} alt="logo" height={36} width={173.76}/>
           <h1>Welcome</h1>
           <p>Enter details to login.</p>
           <form onSubmit={loginHandler}>
