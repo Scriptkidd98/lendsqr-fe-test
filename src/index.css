@@ -4,3 +4,12 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: silver transparent;
+  scrollbar-gutter: stable;
+}
+*::-webkit-scrollbar {
+  width: 8px;
+}
