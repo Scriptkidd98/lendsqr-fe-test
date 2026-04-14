@@ -1,8 +1,16 @@
 @use "../../styles/mixins" as *;
 
+.login_button,
+h1,
+p,
+input,
+.forgot_password_link,
+.show_password_button,
+.error_message {
+    @include avenir-next;
+}
 .login_button {
     background: $primary-light-blue-bg;
-    font-family: Avenir Next;
     font-weight: 600;
     font-size: 14px;
     line-height: 100%;
@@ -32,8 +40,7 @@
 }
 .illustration_div {
     background-color: $off_white_bg;
-    display: flex;
-    flex-direction: column;
+    @include flex-column;
     justify-content: center;
     @include respond(mobile) {
         display: none;
@@ -78,7 +85,6 @@
     max-width: 420px;
 }
 h1 {
-    font-family: Avenir Next;
     font-weight: 700;
     font-size: 40px;
     line-height: 100%;
@@ -86,7 +92,6 @@ h1 {
     color: $primary-dark-blue-text;
 }
 p {
-    font-family: Avenir Next;
     font-weight: 400;
     font-size: 20px;
     line-height: 100%;
@@ -96,7 +101,6 @@ p {
 }
 input {
     color: $primary-gray-text;
-    font-family: Avenir Next;
     font-weight: 400;
     font-size: 14px;
     line-height: 100%;
@@ -144,12 +148,11 @@ label {
     width: 100%;
 }
 form > .input_div:nth-child(3) {
-    margin-top: 4px;
+    margin-top: 24px;
 }
 .forgot_password_link,
 .show_password_button {
     color: $primary-light-blue-text;
-    font-family: Avenir Next;
     font-weight: 600;
     font-size: 12px;
     line-height: 100%;
@@ -181,11 +184,9 @@ form > .input_div:nth-child(3) {
   box-sizing: border-box;
 }
 .error_message {
-    color: $danger-text;
+    color: $primary-red-text;
     font-size: 12px;
     font-weight: 400;
-    font-family: Avenir Next;
-    min-height: 20px;
     margin-top: 4px;
     transition: opacity 0.2s;
     opacity: 1;

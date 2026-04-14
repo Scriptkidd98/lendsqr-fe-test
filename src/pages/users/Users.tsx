@@ -1,9 +1,9 @@
 import DashboardLayout from "../../layouts/dashboard-layout/DashboardLayout";
 import styles from "./Users.module.scss";
-import usersIcon from "../../assets/icons/users2.svg";
-import activeUserIcon from "../../assets/icons/active-users.svg";
-import usersWithLoansIcon from "../../assets/icons/users-with-loans.svg";
-import usersWithSavingsIcon from "../../assets/icons/users-with-savings.svg";
+import usersIcon from "./assets/icons/users2.svg";
+import activeUserIcon from "./assets/icons/active-users.svg";
+import usersWithLoansIcon from "./assets/icons/users-with-loans.svg";
+import usersWithSavingsIcon from "./assets/icons/users-with-savings.svg";
 import UsersTable from "../../components/users-table/UsersTable";
 
 

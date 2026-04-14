@@ -31,15 +31,12 @@ The project is organized for clarity and scalability:
 
 - `components/` – reusable UI components
 - `pages/` – route-level pages
-- `services/` – API and data handling
 - `hooks/` – reusable logic
 - `styles/` – global and SCSS modules
-- `types/` – TypeScript type definitions and interfaces for shared data structures
-- `context/` – React context providers for global state management (e.g., auth, theme)
 - `layouts/` – Shared layout components (e.g., dashboard shell, page wrappers)
 - `assets/` – Static files such as images, fonts, and SVGs
 - `routes/` – Route configuration and wrappers (e.g., protected/public routes)
-- `tests/` -
+- `tests/` – unit and integration tests for key user flows
 
 ---
 
@@ -177,13 +174,58 @@ Current covered tests in `tests/userstable.test.tsx` include:
 - page-size dropdown closes on Escape and outside click
 - row menu closes on Escape and outside click
 
+### 2026-04-14
+
+- Built the **User Details** data flow to resolve user record by route param (`/dashboard/users/:id`) instead of only relying on transient storage.
+- Added robust user detail states:
+  - loading state (`Loading user details...`)
+  - not-found state (`User not found`)
+  - fallback to cached selected user (only when id matches)
+- Kept localStorage as cache (`selectedUserData`) while making route id the source of truth for deep links and refreshes.
+- Wired login to set auth state and navigate into the protected app.
+- Wired logout from dashboard controls to clear auth state and redirect to login.
+
+**Decisions & Rationale:**
+
+- User details now prefer URL-driven lookup so reviewers can open `/dashboard/users/:id` directly and still get consistent data.
+- Local storage remains useful for faster transitions and resilience, but no longer controls identity resolution.
+- Auth flow now reflects realistic route-guard behavior expected in the assessment.
+
+**✅ Testing**
+
+Added app-level flow coverage in `tests/app-flow.test.tsx`:
+
+- logs in and navigates into the protected dashboard
+- redirects unauthenticated users away from protected routes
+- loads the correct user details from the route id
+- logs out and redirects to login
+
 ---
 
 ## 🔧 Setup & Installation
 
 ```bash
-git clone https://github.com/<your-username>/lendsqr-fe-test
+git clone https://github.com/Scriptkidd98/lendsqr-fe-test
 cd lendsqr-fe-test
 npm install
 npm run dev
 ```
+
+## 📎 Submission Links
+
+- Live App: `https://isaac-akinduyile-lendsqr-fe-test.vercel.app/`
+- Source Code Repo: `https://github.com/Scriptkidd98/lendsqr-fe-test`
+- Google Docs: `https://docs.google.com/document/d/1WD2r1u3a4W2dZv-f_ZBrnOU-SEPsiKaG_TJw9v6hRYI/edit?usp=sharing`
+- Loom Video: `https://www.loom.com/share/8f887293a7e3462fb363f69124ec9711`
+
+## ✅ Final Submission Checklist
+
+- App is deployed publicly and accessible without login restrictions
+- Route behavior verified manually (`/login`, `/dashboard/users`, `/dashboard/users/:id`)
+- Tests pass locally (`npm run test -- --run`)
+- README includes setup, testing, architecture notes, and submission links
+- Repo is public and commit history/messages are clear
+- Public review document is complete and includes reasoning/tradeoffs
+- Loom video is recorded and link is publicly accessible
+- All links submitted via the assessment Google Form
+- Submission notification email sent to `careers@lendsqr.com`

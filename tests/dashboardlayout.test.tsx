@@ -12,11 +12,12 @@ const renderLayout = () => render(
   </MemoryRouter>
 );
 
-afterEach(() => {
-  cleanup(); 
-});
 
 describe("DashboardLayout interactions", () => {
+  afterEach(() => {
+    cleanup(); 
+  });
+
   it("renders children", () => {
     renderLayout();
     expect(screen.getByText("Child Content")).toBeInTheDocument();

@@ -1,7 +1,33 @@
 @use "../../styles/mixins" as *;
 
+.tableWrap,
+.usersTable td,
+.showingControl,
+.pageEllipsis,
+.users_table_page_size_select_button span,
+.row_menu_action_div,
+.users_not_found_div,
+.filter_reset_button,
+.filter_apply_button,
+.filter_field input,
+.filter_select_wrap select {
+    @include work-sans;
+}
+.usersTable th div,
+.showingControl,
+.users_table_page_size_select_button,
+.paginationControls,
+.row_menu_action_div,
+.users_not_found_div > div > div {
+    display: flex;
+    align-items: center;
+}
 .usersTableSection {
     width: 100%;
+}
+
+.users_table_shell {
+    position: relative;
 }
 
 .tableWrap {
@@ -10,9 +36,8 @@
     border-radius: 4px;
     background: #fff;
     box-shadow: 3px 5px 20px 0px rgba(0, 0, 0, 0.04);
-    border: 1px solid rgba(33, 63, 125, 0.06);
+    border: 1px solid $secondary-dark-blue-border;
     box-sizing: border-box;
-    font-family: "Work Sans", sans-serif;
     padding: 12px 20px;
 }
 
@@ -33,14 +58,13 @@
     white-space: nowrap;
 }
 .usersTable th div {
-    display: flex;
-    align-items: center;
     gap: 10px;
 }
 .usersTable th div button {
     background-color: transparent;
     border: none;
     padding: 0px;
+    cursor: pointer;
 }
 .usersTable td {
     padding: 20px 10px;
@@ -49,7 +73,6 @@
     color: $primary-gray-text;
     white-space: nowrap;
     font-weight: 400;
-    font-family: "Work Sans", sans-serif;
     line-height: 100%;
     letter-spacing: 0px;
 }
@@ -92,21 +115,16 @@
 }
 
 .paginationBar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    @include flex-between;
     gap: 16px;
     margin-top: 24px;
     flex-wrap: wrap;
 }
 
 .showingControl {
-    display: flex;
-    align-items: center;
     gap: 8px;
     color: $primary-gray-text;
     font-size: 14px;
-    font-family: "Work Sans", sans-serif;
     font-weight: 400;
 }
 
@@ -117,14 +135,10 @@
     border-radius: 4px;
     background: #E5E8EE;
     color: $primary-dark-blue-text;
-    display: flex;
-    align-items: center;
     gap: 21px;
 }
 
 .paginationControls {
-    display: flex;
-    align-items: center;
     gap: 10px;
 }
 .pageButton,
@@ -177,7 +191,6 @@
     background-color: transparent;
     color: $primary-gray-text;
     font-size: 14px;
-    font-family: "Work Sans", sans-serif;
     font-weight: 400;
     font-size: 16px;
     line-height: 100%;
@@ -221,12 +234,140 @@
     position: relative;
 }
 .users_table_page_size_select_button span {
-    font-family: "Work Sans", sans-serif;
     font-weight: 500;
     font-size: 14px;
     line-height: 100%;
     letter-spacing: 0px;
     color: $primary-dark-blue-text;
+}
+
+.filter_menu {
+    position: absolute;
+    z-index: 1200;
+    width: 270px;
+    padding: 32px 28px 30px;
+    border-radius: 4px;
+    border: 1px solid rgba(84, 95, 125, 0.14);
+    background: #ffffff;
+    box-shadow: 3px 5px 20px 0px rgba(0, 0, 0, 0.04);
+    box-sizing: border-box;
+}
+
+.filter_field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 22px;
+}
+
+.filter_field label {
+    all: unset;
+    @include work-sans;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 1.2;
+    color: $primary-dark-blue-text;
+}
+
+.filter_field input,
+.filter_select_wrap select {
+    width: 100%;
+    height: 40px;
+    box-sizing: border-box;
+    border: 1px solid rgba(33, 63, 125, 0.2);
+    border-radius: 8px;
+    background: #ffffff;
+    padding: 0 16px;
+    font-size: 14px;
+    font-weight: 400;
+    color: $primary-gray-text;
+    outline: none;
+}
+
+.filter_field input::placeholder,
+.filter_select_wrap select {
+    color: rgba(84, 95, 125, 0.7);
+}
+
+.filter_field input:focus,
+.filter_select_wrap select:focus {
+    border-color: $primary-light-blue-border;
+}
+
+.filter_select_wrap {
+    position: relative;
+}
+
+.filter_select_wrap select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    padding-right: 42px;
+}
+
+.filter_select_wrap svg {
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+}
+
+.filter_input_with_icon {
+    position: relative;
+}
+
+.filter_input_with_icon input {
+    padding-right: 46px;
+}
+
+.filter_input_with_icon svg {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+}
+
+.filter_actions {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-top: 26px;
+}
+
+@media (max-width: 640px) {
+    .filter_menu {
+        left: 0 !important;
+        width: 100%;
+    }
+}
+
+.filter_reset_button,
+.filter_apply_button {
+    height: 40px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1;
+    cursor: pointer;
+    flex: 1;
+}
+
+.filter_reset_button {
+    background: #ffffff;
+    border: 1px solid $primary-dark-blue-border;
+    color: $primary-dark-blue-text;
+}
+
+.filter_apply_button {
+    background: $primary-light-blue-bg;
+    border: 1px solid $primary-light-blue-border;
+    color: #ffffff;
+}
+
+.filter_apply_button:hover {
+    background: $primary-light-blue-hover-bg;
 }
 .row_menu {
     box-shadow: 3px 5px 20px 0px rgba(0, 0, 0, 0.04);
@@ -243,15 +384,12 @@
     z-index: 1000;
 }
 .row_menu_action_div {
-    display: flex;
-    align-items: center;
     gap: 10px;
     box-sizing: border-box;
     width: 100%;
     height: 40px;
     cursor: pointer;
     color: #545f7d;
-    font-family: "Work Sans", sans-serif;
     font-size: 14px;
     font-weight: 500;
     line-height: 1;
@@ -282,9 +420,8 @@
     border-radius: 4px;
     background: #fff;
     box-shadow: 3px 5px 20px 0px rgba(0, 0, 0, 0.04);
-    border: 1px solid rgba(33, 63, 125, 0.06);
+    border: 1px solid $secondary-dark-blue-border;
     box-sizing: border-box;
-    font-family: "Work Sans", sans-serif;
     padding: 12px 0px 30px 0px;
 }
 .users_not_found_div > div {
@@ -299,8 +436,6 @@
     font-size: 18px;
 }
 .users_not_found_div > div > div {
-    display: flex;
-    align-items: center;
     gap: 8px;
     margin-top: 12px;
 }

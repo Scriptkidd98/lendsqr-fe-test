@@ -1,0 +1,319 @@
+@use "../../styles/mixins" as *;
+
+
+.blacklist_user_button, 
+.activate_user_button,
+.back_to_users_link,
+.user_identity_block h2,
+.user_balance_block h2,
+.user_identity_block p,
+.user_tier_block p,
+.user_balance_block p,
+.info_section h3,
+.info_item h4,
+.info_item p {
+    @include work-sans;
+}
+.back_to_users_link {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 100%;
+    letter-spacing: 0px;
+    color: $primary-gray-text;
+    background-color: transparent;
+    border: none;
+    margin-bottom: 32px;
+    text-decoration: none;
+}
+h1 {
+    margin: 0px;
+}
+.user_detail_top_div {
+    margin-top: 52px;
+    opacity: 1;
+    border-radius: 4px;
+    border-width: 1px;
+    border: 1px solid $secondary-dark-blue-border;
+    box-shadow: 3px 5px 20px 0px rgba(0, 0, 0, 0.04);
+    background-color: #ffffff;
+    overflow: hidden;
+}
+.heading_buttons_div {
+    @include flex-between;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+.blacklist_user_button { 
+    color: $primary-red-text; 
+    border: 1px solid $primary-red-border;
+}
+.activate_user_button {
+    border: 1px solid $primary-light-blue-border;
+    color: $primary-light-blue-text; 
+}
+.blacklist_user_button, 
+.activate_user_button {
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 100%;
+    letter-spacing: 10%;
+    text-align: center;
+    text-transform: uppercase;
+    padding: 12px 16px;
+    background-color: transparent;
+    border-radius: 8px;
+}
+.heading_buttons_div div {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.user_detail_top_info {
+    display: flex;
+    align-items: center;
+    padding: 30px 30px 26px;
+}
+.user_tier_block,
+.user_balance_block {
+    min-height: 80px;
+    border-left: 1px solid rgba(84, 95, 125, 0.2); 
+    @include flex-center;
+    flex-direction: column;
+}
+.user_identity_block {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding-right: 30px;
+}
+
+.avatar_placeholder {
+    height: 100px;
+    width: 100px;
+    border-radius: 100%;
+    background-color: rgba(33, 63, 125, 0.1);
+    @include flex-center;
+}
+
+.user_identity_block h2,
+.user_balance_block h2 {
+    margin: 0;
+    font-weight: 500;
+    font-size: 22px;
+    line-height: 100%;
+    letter-spacing: 0;
+    color: $primary-dark-blue-text;
+}
+
+.user_identity_block p,
+.user_tier_block p,
+.user_balance_block p {
+    margin: 14px 0 0;
+    font-weight: 400;
+    line-height: 100%;
+    letter-spacing: 0;
+    color: $primary-gray-text;
+}
+.user_balance_block p {
+    font-size: 12px;
+}
+.user_identity_block p,
+.user_tier_block p {
+    font-size: 14px;
+}
+.user_tier_block {
+    padding: 0 30px;
+}
+
+.tier_stars {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-top: 10px;
+}
+
+.tier_stars span {
+    font-size: 16px;
+    color: rgba(233, 178, 0, 0.35);
+}
+
+.tier_stars .active_star {
+    color: rgba(233, 178, 0, 1);
+}
+
+.user_balance_block {
+    padding-left: 30px;
+}
+
+.user_details_tabs {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 0 30px;
+    margin-top: 25px;
+}
+
+.user_details_tabs button {
+    border: none;
+    background-color: transparent;
+    font-family: "SF Compact Text", sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 100%;
+    letter-spacing: 0;
+    color: rgba(0, 0, 0, 0.8);
+    padding: 0 6px 12px;
+    cursor: pointer;
+}
+
+.user_details_tabs .active_tab {
+    color: $primary-light-blue-text;
+    border-bottom: 2px solid $primary-light-blue-border;
+    padding: 0 26px 12px;
+}
+
+.personal_info_div {
+    margin-top: 32px;
+    border: 1px solid $secondary-dark-blue-border;
+    border-radius: 4px;
+    box-shadow: 3px 5px 20px 0px rgba(0, 0, 0, 0.04);
+    background-color: #ffffff;
+    padding: 30px 30px 45px 30px;
+}
+
+.info_section {
+    padding-bottom: 30px;
+    margin-bottom: 34px;
+    border-bottom: 1px solid rgba(33, 63, 125, 0.1);
+}
+
+.info_section h3 {
+    margin: 0 0 30px;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 100%;
+    letter-spacing: 0;
+    color: $primary-dark-blue-text;
+}
+
+.info_section_last {
+    padding-bottom: 0;
+    margin-bottom: 0;
+}
+
+.info_grid_five,
+.info_grid_four,
+.info_grid_three {
+    display: grid;
+    column-gap: 26px;
+    row-gap: 30px;
+}
+.info_grid_five {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+.info_grid_four {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+.info_grid_three {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+.info_item h4 {
+    margin: 0 0 14px;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 100%;
+    letter-spacing: 0;
+    color: $primary-gray-text;
+}
+.info_item {
+    min-width: 0;
+}
+.info_item p {
+    margin: 0;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 100%;
+    letter-spacing: 0;
+    color: $primary-gray-text;
+    white-space: normal;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+}
+
+@media (max-width: 1100px) {
+    .user_detail_top_info {
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+
+    .user_identity_block,
+    .user_tier_block {
+        border-right: none;
+        padding-right: 0;
+    }
+
+    .user_tier_block,
+    .user_balance_block {
+        padding-left: 0;
+    }
+
+    .user_details_tabs {
+        overflow-x: auto;
+        justify-content: flex-start;
+        padding-bottom: 0;
+    }
+
+    .user_details_tabs::-webkit-scrollbar {
+        display: none;
+    }
+
+    .user_details_tabs button {
+        white-space: nowrap;
+    }
+
+    .info_grid_five {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .info_grid_four {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .info_grid_three {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 700px) {
+    .personal_info_div {
+        padding: 20px 20px 30px 20px;
+    }
+
+    .info_grid_five,
+    .info_grid_four,
+    .info_grid_three {
+        grid-template-columns: 1fr;
+        row-gap: 30px;
+    }
+}
+@media(max-width: 636px) {
+    .user_balance_block,
+    .user_identity_block,
+    .user_tier_block {
+        flex-grow: 1;
+    }
+}
+.loading_user_details_div {
+    @include flex-center;
+    height: 200px;
+    background-color: #ffffff;
+    border: 1px solid $secondary-dark-blue-border;
+    border-radius: 4px;
+    box-shadow: 3px 5px 20px 0px rgba(0, 0, 0, 0.04);
+    margin-top: 52px;
+}

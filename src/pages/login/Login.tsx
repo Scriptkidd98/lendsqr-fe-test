@@ -1,13 +1,14 @@
 import { useState } from "react";
 import styles from "./Login.module.scss";
 import logo from "../../assets/images/logo.svg";
-import illustration from "../../assets/images/pablo-sign-in.svg";
-import { Link } from "react-router-dom";
+import illustration from "./assets/images/pablo-sign-in.svg";
+import { Link, useNavigate } from "react-router-dom";
 import validateEmail from "../../hooks/validateEmail";
 import Spinner from "../../components/spinner/Spinner";
 
 
 const Login = () => {
+  const navigate = useNavigate();
   const[email, setEmail] = useState<string>("");
   const[password, setPassword] = useState<string>("");
   const[isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false);
@@ -15,34 +16,36 @@ const Login = () => {
   const [emailError, setEmailError] = useState<string>("");
   const [passwordError, setPasswordError] = useState<string>("");
 
-  const validateEmailBeforeLogin = () => {
-    if(email !== "" && !validateEmail(email)) {
-      setEmailError("Email address is an invalid format");
-    } 
-  }
-
   const loginHandler = (e: React.SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
 
+    setEmailError("");
+    setPasswordError("");
+
+    let hasError = false;
+
     if (!email) {
       setEmailError("Email field cannot be empty");
-    } else {
-      setEmailError("");
+      hasError = true;
     }
 
     if (!password) {
       setPasswordError("Password field cannot be empty");
-    } else {
-      setPasswordError("");
+      hasError = true;
     }
 
-    if(email && !validateEmail(email)) {
+    if (email && !validateEmail(email)) {
       setEmailError("Email address is an invalid format");
-    } 
+      hasError = true;
+    }
 
-    setIsSigningIn(true);
-
-    validateEmailBeforeLogin();
+    if (!hasError) {
+      localStorage.setItem("auth", "true");
+      setIsSigningIn(true);
+      setTimeout(() => {
+        navigate("/dashboard/users", { replace: true });
+      }, 1000);
+    }
   };
 
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -71,7 +74,7 @@ const Login = () => {
           <img className={styles.mobile_logo} src={logo} alt="logo" height={36} width={173.76}/>
           <h1>Welcome</h1>
           <p>Enter details to login.</p>
-          <form onSubmit={loginHandler}>
+          <form onSubmit={loginHandler} noValidate>
             <div className={styles.input_div}>
               <input placeholder=" " id="email" type="email" value={email} onChange={handleEmailChange} />
               <label htmlFor="email">Email</label>
@@ -82,14 +85,14 @@ const Login = () => {
             <div className={styles.input_div}>
               <input placeholder=" " id="password" type={isPasswordVisible ? "text" : "password"} value={password} onChange={handlePasswordChange} />
               <label htmlFor="password">Password</label>
-              <button className={styles.show_password_button} onClick={() => setIsPasswordVisible(!isPasswordVisible)}>
+              <button type="button" className={styles.show_password_button} onClick={() => setIsPasswordVisible(!isPasswordVisible)} data-testid="toggle-password-visibility">
                 {isPasswordVisible ? "HIDE" : "SHOW"}
               </button>
             </div>
             <div className={styles.error_message}>{passwordError}</div>
 
             <Link to="#" className={styles.forgot_password_link}>Forgot PASSWORD?</Link>
-            <button type="submit" className={styles.login_button} disabled={isSigningIn}>
+            <button type="submit" name="submit" className={styles.login_button} disabled={isSigningIn} data-testid="login-button">
               {isSigningIn ? 
                 <Spinner/> :
                 <span>LOG IN</span>

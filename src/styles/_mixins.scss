@@ -32,3 +32,15 @@
     }
   }
 }
+
+@mixin work-sans {
+  font-family: "Work Sans", sans-serif;
+}
+
+@mixin avenir-next {
+  font-family: "Avenir Next", sans-serif;
+}
+
+@mixin sf-compact-text {
+  font-family: "SF Compact Text", sans-serif;
+}

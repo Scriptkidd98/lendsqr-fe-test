@@ -3,6 +3,7 @@ import { MemoryRouter } from "react-router-dom";
 import { afterEach, beforeEach, describe, expect, it, vi, type Mock } from "vitest";
 import UsersTable from "../src/components/users-table/UsersTable";
 import "@testing-library/jest-dom/vitest";
+import userEvent from "@testing-library/user-event";
 
 type UserStatus = "Active" | "Inactive" | "Pending" | "Blacklisted";
 
@@ -135,5 +136,51 @@ describe("UsersTable", () => {
     await waitFor(() => {
       expect(screen.queryByRole("menu")).not.toBeInTheDocument();
     });
+  });
+
+  it("opens the filter menu and filters rows when applied", async () => {
+    const users = [
+      {
+        id: "1",
+        organization: "Lendsqr",
+        username: "Alpha User",
+        email: "alpha@mail.com",
+        phoneNumber: "08000000001",
+        dateJoined: "May 15, 2020 10:00 AM",
+        status: "Active" as UserStatus,
+      },
+      {
+        id: "2",
+        organization: "Irorun",
+        username: "Beta User",
+        email: "beta@mail.com",
+        phoneNumber: "08000000002",
+        dateJoined: "May 15, 2020 10:00 AM",
+        status: "Pending" as UserStatus,
+      },
+    ];
+
+    (globalThis.fetch as Mock).mockResolvedValue({
+      ok: true,
+      json: async () => users,
+    });
+
+    const user = userEvent.setup();
+
+    renderTable();
+
+    expect(await screen.findByText("Alpha User")).toBeInTheDocument();
+    expect(screen.getByText("Beta User")).toBeInTheDocument();
+
+    await user.click(screen.getByRole("button", { name: /filter by organization/i }));
+
+    const dialog = screen.getByRole("dialog", { name: /filter users/i });
+    expect(dialog).toBeInTheDocument();
+
+    await user.selectOptions(screen.getAllByLabelText(/organization/i)[0], "Lendsqr");
+    await user.click(screen.getByRole("button", { name: /^filter$/i }));
+
+    expect(await screen.findByText("Alpha User")).toBeInTheDocument();
+    expect(screen.queryByText("Beta User")).not.toBeInTheDocument();
   });
 });
