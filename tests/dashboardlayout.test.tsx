@@ -57,18 +57,19 @@ describe("DashboardLayout interactions", () => {
   it("opens and closes user menu (outside click + Escape)", () => {
     renderLayout();
     const userMenuButton = screen.getByTestId("dashboard_user_menu_button");
-    const userMenu = screen.getByTestId("dashboard-user-menu");
-
+  
     fireEvent.click(userMenuButton);
-    expect(userMenu).toHaveAttribute("data-state", "open");
+    const userMenu = screen.getByTestId("dashboard-user-menu");
+    expect(userMenuButton).toHaveAttribute("aria-expanded", "true");
+    expect(userMenu).toBeInTheDocument();
 
     fireEvent.mouseDown(document.body);
-    expect(userMenu).toHaveAttribute("data-state", "closed");
+    expect(userMenuButton).toHaveAttribute("aria-expanded", "false");
+    expect(userMenu).not.toBeInTheDocument();
 
     fireEvent.click(userMenuButton);
-    expect(userMenu).toHaveAttribute("data-state", "open");
-
     fireEvent.keyDown(document, { key: "Escape" });
-    expect(userMenu).toHaveAttribute("data-state", "closed");
+    expect(userMenuButton).toHaveAttribute("aria-expanded", "false");
+    expect(userMenu).not.toBeInTheDocument();
   });
 });

@@ -1,0 +1,322 @@
+@use "../../styles/mixins" as *;
+
+.usersTableSection {
+    width: 100%;
+}
+
+.tableWrap {
+    width: 100%;
+    overflow-x: auto;
+    border-radius: 4px;
+    background: #fff;
+    box-shadow: 3px 5px 20px 0px rgba(0, 0, 0, 0.04);
+    border: 1px solid rgba(33, 63, 125, 0.06);
+    box-sizing: border-box;
+    font-family: "Work Sans", sans-serif;
+    padding: 12px 20px;
+}
+
+.usersTable {
+    width: 100%;
+    min-width: 980px;
+    border-collapse: collapse;
+}
+
+.usersTable th {
+    text-align: left;
+    padding: 20px 10px;
+    font-size: 12px;
+    line-height: 100%;
+    font-weight: 600;
+    color: $primary-gray-text;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+.usersTable th div {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.usersTable th div button {
+    background-color: transparent;
+    border: none;
+    padding: 0px;
+}
+.usersTable td {
+    padding: 20px 10px;
+    border-top: 1px solid rgba(33, 63, 125, 0.1);
+    font-size: 14px;
+    color: $primary-gray-text;
+    white-space: nowrap;
+    font-weight: 400;
+    font-family: "Work Sans", sans-serif;
+    line-height: 100%;
+    letter-spacing: 0px;
+}
+
+.statusBadge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 80px;
+    padding: 7px 12px;
+    border-radius: 999px;
+    font-size: 12px;
+    line-height: 1;
+}
+
+.statusActive {
+    background: rgba(57, 205, 98, 0.1);
+    color: rgba(57, 205, 98, 1);
+}
+
+.statusPending {
+    background: rgba(233, 178, 0, 0.1);
+    color: rgba(233, 178, 0, 1);
+}
+
+.statusBlacklisted {
+    background: rgba(228, 3, 59, 0.1);
+    color: rgba(228, 3, 59, 1);
+}
+
+.statusInactive {
+    background: rgba(84, 95, 125, 0.1);
+    color: $primary-gray-text;
+}
+
+.actionsButton {
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+}
+
+.paginationBar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-top: 24px;
+    flex-wrap: wrap;
+}
+
+.showingControl {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: $primary-gray-text;
+    font-size: 14px;
+    font-family: "Work Sans", sans-serif;
+    font-weight: 400;
+}
+
+.users_table_page_size_select_button {
+    height: 32px;
+    padding: 0 12px;
+    border: none;
+    border-radius: 4px;
+    background: #E5E8EE;
+    color: $primary-dark-blue-text;
+    display: flex;
+    align-items: center;
+    gap: 21px;
+}
+
+.paginationControls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.pageButton,
+.pageArrowButton {
+    width: 24px;
+    height: 24px;
+    @include flex-center;
+    border: 0;
+    border-radius: 4px;
+    background: transparent;
+    cursor: pointer;
+}
+.pageButton {
+    color: #969DAF;
+}
+.pageButtonActive {
+    background: transparent;
+    color: $primary-gray-text;
+    font-weight: 600;
+}
+.pageArrowButton {
+    background-color: #E5E8EE;
+    color: $primary-dark-blue-text;
+}
+.pageArrowButton:disabled {
+    cursor: not-allowed;
+    color: #7083AA !important;
+    opacity: 1;
+}
+@media (max-width: 900px) {
+    .usersTable {
+        min-width: 840px;
+    }
+
+    .usersTable th,
+    .usersTable td {
+        padding: 16px 12px;
+    }
+}
+@media (max-width: 640px) {
+    .paginationBar {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+.previousPageArrowIcon {
+    rotate: 180deg;
+}
+.pageEllipsis {
+    background-color: transparent;
+    color: $primary-gray-text;
+    font-size: 14px;
+    font-family: "Work Sans", sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 100%;
+    letter-spacing: 0px;
+    border: none;
+}
+.users_table_page_size_options_listbox {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 32px;
+    left: 0;
+    right: 0;
+    list-style: none;
+    justify-content: center;
+    margin: 0px;
+    gap: 4px;
+    box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(219, 219, 219, 1);
+    padding: 6px 0px;
+    background-color: #FFFFFF;
+    z-index: 100;
+    width: 100%;
+    box-sizing: border-box;
+    border-radius: 4px;
+}
+.users_table_page_size_options_listbox li {
+    border: none;
+    border-radius: 4px;
+    @include flex-center;
+    width: 100%;
+    height: 20px;
+    background-color: transparent;
+    cursor: pointer;
+
+}
+.users_table_page_size_options_listbox li:hover {
+    background: rgb(241, 241, 241);
+}
+.users_table_page_size_select_div {
+    position: relative;
+}
+.users_table_page_size_select_button span {
+    font-family: "Work Sans", sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 100%;
+    letter-spacing: 0px;
+    color: $primary-dark-blue-text;
+}
+.row_menu {
+    box-shadow: 3px 5px 20px 0px rgba(0, 0, 0, 0.04);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 180px;
+    height: 130px;
+    border-radius: 4px;
+    border: 1px solid rgba(84, 95, 125, 0.04);
+    box-sizing: border-box;
+    background-color: white;
+    padding: 12px 18px;
+    z-index: 1000;
+}
+.row_menu_action_div {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    box-sizing: border-box;
+    width: 100%;
+    height: 40px;
+    cursor: pointer;
+    color: #545f7d;
+    font-family: "Work Sans", sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1;
+    text-decoration: none;
+    border-radius: 4px;
+    padding: 4px 10px;
+}
+.row_menu button {
+    background-color: transparent;
+    border: none;
+}
+
+.row_menu_action_div:hover {
+  background: rgba(57, 205, 204, 0.06);
+}
+
+.row_menu_action_div img {
+  flex-shrink: 0;
+}
+
+.row_menu_action_div span {
+  white-space: nowrap;
+}
+
+.users_not_found_div {
+    @include flex-center;
+    height: 200px;
+    border-radius: 4px;
+    background: #fff;
+    box-shadow: 3px 5px 20px 0px rgba(0, 0, 0, 0.04);
+    border: 1px solid rgba(33, 63, 125, 0.06);
+    box-sizing: border-box;
+    font-family: "Work Sans", sans-serif;
+    padding: 12px 0px 30px 0px;
+}
+.users_not_found_div > div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+.users_not_found_div > div p {
+    font-weight: 500;
+    color: $primary-dark-blue-border;
+    font-size: 18px;
+}
+.users_not_found_div > div > div {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 12px;
+}
+.users_not_found_div > div > div > button:nth-of-type(1),
+.users_not_found_div > div > div > button:nth-of-type(2) {
+    border-radius: 20px;
+    padding: 8px 40px;
+    font-size: 14px; 
+}
+.users_not_found_div > div > div > button:nth-of-type(1) {
+    color: $primary-dark-blue-text;
+    background-color: transparent;
+    border: 1px solid $primary-dark-blue-border;
+}   
+.users_not_found_div > div > div > button:nth-of-type(2) {
+    background-color: $primary-dark-blue-bg;
+    color: white;
+    border: none;
+}

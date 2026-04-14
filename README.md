@@ -39,6 +39,7 @@ The project is organized for clarity and scalability:
 - `layouts/` – Shared layout components (e.g., dashboard shell, page wrappers)
 - `assets/` – Static files such as images, fonts, and SVGs
 - `routes/` – Route configuration and wrappers (e.g., protected/public routes)
+- `tests/` -
 
 ---
 
@@ -77,7 +78,6 @@ npm run test -- --watch
 - Used Vite for fast development and TypeScript for type safety.
 - Global SCSS variables via Vite config to avoid repetitive imports.
 - Error handling and layout stability for best UX and pixel-perfect fidelity.
-- React.JSX.Element for route wrappers: wrapper must return a concrete renderable element.
 
 **🧠 UX & Interaction Considerations:**
 
@@ -125,13 +125,57 @@ These decisions ensure the dashboard remains visually accurate, responsive, and 
 
 **✅ Testing**
 
-Current covered interactions include:
+Current covered tests in `tests/dashboardlayout.test.tsx` include:
 
 - Dashboard layout renders child content
 - `Ctrl/Cmd + K` focuses dashboard search input
 - Hamburger toggles side nav open/closed
 - Backdrop click closes mobile side nav
 - User menu opens and closes via outside click and `Escape`
+
+### 2026-04-13
+
+- Built the **Users page** layout with dashboard metric cards.
+- Integrated the **UsersTable** component into the Users page.
+- Implemented data loading from `public/mock/users.json` via `fetch("/mock/users.json")`.
+- Added table state handling:
+  - loading state (`Loading users...`)
+  - error state (`Could not load users`)
+- Implemented table features:
+  - client-side pagination
+  - page size selector (`10 / 20 / 50 / 100`)
+  - page number truncation with ellipsis controls
+  - previous/next navigation
+- Added row action menu (via portal for performance) with:
+  - View Details
+  - Blacklist User
+  - Activate User
+- Added/verified accessibility hooks:
+  - `aria-label`, `aria-expanded`, `aria-haspopup`
+  - useful `data-testid` values for testing
+
+**Decisions & Rationale:**
+
+- React portal for performance optimization as table data scales
+- Conditional injecting of ephemeral menus in DOM vs display toggle
+
+**🧠 UX & Interaction Considerations:**
+
+Some considerations include:
+
+- Menu close behavior: outside click, `Escape`, and `Tab`
+- Ellipsis in pagination for multi-step navigation
+- 'Users not found' error state and retry for faster recovery time
+
+**✅ Testing**
+
+Current covered tests in `tests/userstable.test.tsx` include:
+
+- renders rows from API and shows total count
+- displays error state when fetch fails
+- pagination works on “Next page”
+- page-size dropdown closes on Escape and outside click
+- row menu closes on Escape and outside click
 
 ---
 
