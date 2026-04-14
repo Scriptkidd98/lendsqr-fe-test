@@ -211,6 +211,13 @@ npm install
 npm run dev
 ```
 
+## ▲ Vercel Setup
+
+This project includes `vercel.json` for Vercel deployment with:
+
+- Vite build/output configuration (`npm run build` -> `dist`)
+- SPA rewrite to `index.html` for client-side routes (e.g. `/dashboard/users/:id`)
+
 ## 📎 Submission Links
 
 - Live App: `https://isaac-akinduyile-lendsqr-fe-test.vercel.app/`
