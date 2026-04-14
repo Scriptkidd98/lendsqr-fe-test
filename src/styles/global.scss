@@ -1,6 +1,55 @@
 @use "./mixins" as *;
 
 @import url('https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+@font-face {
+    font-family: "Avenir Next";
+    src: url("../assets/fonts/avenir-next/AvenirNextCyr-Regular.woff2") format("woff2"),
+    url("../assets/fonts/avenir-next/AvenirNextCyr-Regular.woff") format("woff"),
+    url("../assets/fonts/avenir-next/AvenirNextCyr-Regular.ttf") format("truetype");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Avenir Next";
+    src: url("../assets/fonts/avenir-next/AvenirNextCyr-Medium.woff2") format("woff2"),
+    url("../assets/fonts/avenir-next/AvenirNextCyr-Medium.woff") format("woff"),
+    url("../assets/fonts/avenir-next/AvenirNextCyr-Medium.ttf") format("truetype");
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Avenir Next";
+    src: url("../assets/fonts/avenir-next/AvenirNextCyr-Demi.woff2") format("woff2"),
+    url("../assets/fonts/avenir-next/AvenirNextCyr-Demi.woff") format("woff"),
+    url("../assets/fonts/avenir-next/AvenirNextCyr-Demi.ttf") format("truetype");
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Avenir Next";
+    src: url("../assets/fonts/avenir-next/AvenirNextCyr-Bold.woff2") format("woff2"),
+    url("../assets/fonts/avenir-next/AvenirNextCyr-Bold.woff") format("woff"),
+    url("../assets/fonts/avenir-next/AvenirNextCyr-Bold.ttf") format("truetype");
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "SF Compact Text";
+    src: url("../assets/fonts/sf-compact-text/SF-Compact-Text-Regular.ttf") format("truetype");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
 
 body {
     margin: 0;

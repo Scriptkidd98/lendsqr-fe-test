@@ -1,40 +1,48 @@
 import styles from "./DashboardLayout.module.scss";
 import logo from "../../assets/images/logo.svg";
-import searchIcon from "../../assets/icons/search.svg";
+import searchIcon from "./assets/icons/search.svg";
 import { useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
-import bellIcon from "../../assets/icons/bell.svg";
-import avatar from "../../assets/images/avatar.svg";
-import chevronDownFilledIcon from "../../assets/icons/chevron-down-filled.svg";
-import briefcaseIcon from "../../assets/icons/briefcase.svg";
-import chevronDownIcon from "../../assets/icons/chevron-down.svg";
-import homeIcon from "../../assets/icons/home.svg";
-import sackIcon from "../../assets/icons/sack.svg";
-import userCheckIcon from "../../assets/icons/user-check.svg";
-import userTimesIcon from "../../assets/icons/user-times.svg";
-import usersIcon from "../../assets/icons/users.svg";
-import userFriendsIcon from "../../assets/icons/user-friends.svg";
-import handshakeIcon from "../../assets/icons/handshake.svg";
-import piggyBankIcon from "../../assets/icons/piggy-bank.svg";
-import handWithSackIcon from "../../assets/icons/hand-with-sack.svg";
-import clipboardIcon from "../../assets/icons/clipboard.svg";
-import slidersIcon from "../../assets/icons/sliders.svg";
-import badgePercentIcon from "../../assets/icons/badge-percent.svg";
-import galaxyIcon from "../../assets/icons/galaxy.svg";
-import userCogIcon from "../../assets/icons/user-cog.svg";
-import scrollIcon from "../../assets/icons/scroll.svg";
-import barChartIcon from "../../assets/icons/bar-chart.svg";
-import transactionIcon from "../../assets/icons/phone-in-and-out.svg";
-import mobileLogo from "../../assets/images/mobile-logo.svg";
-import tireIcon from "../../assets/icons/tire.svg";
-import signoutIcon from "../../assets/icons/sign-out.svg";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import bellIcon from "./assets/icons/bell.svg";
+import avatar from "./assets/images/avatar.svg";
+import chevronDownFilledIcon from "./assets/icons/chevron-down-filled.svg";
+import briefcaseIcon from "./assets/icons/briefcase.svg";
+import chevronDownIcon from "./assets/icons/chevron-down.svg";
+import homeIcon from "./assets/icons/home.svg";
+import sackIcon from "./assets/icons/sack.svg";
+import userCheckIcon from "./assets/icons/user-check.svg";
+import userTimesIcon from "./assets/icons/user-times.svg";
+import usersIcon from "./assets/icons/users.svg";
+import userFriendsIcon from "./assets/icons/user-friends.svg";
+import handshakeIcon from "./assets/icons/handshake.svg";
+import piggyBankIcon from "./assets/icons/piggy-bank.svg";
+import handWithSackIcon from "./assets/icons/hand-with-sack.svg";
+import clipboardIcon from "./assets/icons/clipboard.svg";
+import slidersIcon from "./assets/icons/sliders.svg";
+import badgePercentIcon from "./assets/icons/badge-percent.svg";
+import galaxyIcon from "./assets/icons/galaxy.svg";
+import userCogIcon from "./assets/icons/user-cog.svg";
+import scrollIcon from "./assets/icons/scroll.svg";
+import barChartIcon from "./assets/icons/bar-chart.svg";
+import transactionIcon from "./assets/icons/phone-in-and-out.svg";
+import mobileLogo from "./assets/images/mobile-logo.svg";
+import tireIcon from "./assets/icons/tire.svg";
+import signoutIcon from "./assets/icons/sign-out.svg";
 
 
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   const location = useLocation();
+  const navigate = useNavigate();
 
   const[isUserMenuOpen, setIsUserMenuOpen] = useState<boolean>(false);
   const[isSideNavOpen, setIsSideNavOpen] = useState<boolean>(false);
+
+  const handleLogout = () => {
+    localStorage.removeItem("auth");
+    setIsUserMenuOpen(false);
+    setIsSideNavOpen(false);
+    navigate("/login", { replace: true });
+  };
 
   const handleSideNavClick: React.MouseEventHandler<HTMLElement> = (event) => {
     const target = event.target as HTMLElement;
@@ -44,7 +52,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   };
 
   useEffect(() => {
-    document.addEventListener("keydown", (event) => {
+    const handleCmdKPress = (event: KeyboardEvent) => {
       if ((event.metaKey || event.ctrlKey) && event.key === "k") {
         event.preventDefault();
         const searchInput = document.querySelector(`.${styles.dashboard_layout_header_search_input_div} input`) as HTMLInputElement;
@@ -52,7 +60,13 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
           searchInput.focus();
         }
       }
-    });
+    };
+
+    document.addEventListener("keydown", handleCmdKPress);
+
+    return () => {
+      document.removeEventListener("keydown", handleCmdKPress);
+    };
   }, []);
 
   useEffect(() => {
@@ -168,7 +182,13 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
               <span>adedeji@gmail.com</span>
             </a>
             <a href="#" className={styles.dashboard_layout_top_nav_user_menu_link}>Manage account</a>
-            <a href="#" className={styles.dashboard_layout_top_nav_user_menu_link}>Log out</a>
+            <button
+              type="button"
+              className={styles.dashboard_layout_top_nav_user_menu_link}
+              onClick={handleLogout}
+            >
+              Log out
+            </button>
           </div>
         </div>
       )}
@@ -187,14 +207,12 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
           data-state={isSideNavOpen ? "open" : "closed"}
         >
           <button className={styles.switch_organization_button}>
-            <div className={styles.switch_organization_button_div}>
-              <img src={briefcaseIcon} height={16} width={16}></img>
-              <span>Switch Organization</span>
-              <img src={chevronDownIcon} height={11.21} width={6.57}></img>
-            </div>
+            <img src={briefcaseIcon} height={16} width={16}></img>
+            <span>Switch Organization</span>
+            <img src={chevronDownIcon} height={11.21} width={6.57}></img>
           </button>
 
-          <Link to="/dashboard" className={`${location.pathname === "/dashboard" ? styles.active : ""}`}>
+          <Link to="#">
             <img src={homeIcon} width={16} height={14.22}></img>
             <span>Dashboard</span>
           </Link>
@@ -314,7 +332,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
           </div>
 
           <div>
-            <button>
+            <button type="button" onClick={handleLogout}>
               <img src={signoutIcon} width={16} height={16}></img>
               <span>Logout</span>
             </button>
