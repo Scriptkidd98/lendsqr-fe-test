@@ -1,11 +1,9 @@
-import type { JSX } from "react";
-import { Navigate } from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
 
-const PublicRoutes = ({ children } : { children: JSX.Element }) => {
-    const isAuthenticated = !!localStorage.getItem("auth");
+const PublicRoutes = () => {
+  const isAuthenticated = !!localStorage.getItem("auth");
+  
+  return isAuthenticated ? <Navigate to="/dashboard" replace /> : <Outlet />;
+};
 
-
-    return isAuthenticated ? ( <Navigate to="/dashboard" replace /> ) : ( children )
-}
-
-export default PublicRoutes
+export default PublicRoutes;

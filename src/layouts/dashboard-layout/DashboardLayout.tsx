@@ -26,6 +26,8 @@ import scrollIcon from "../../assets/icons/scroll.svg";
 import barChartIcon from "../../assets/icons/bar-chart.svg";
 import transactionIcon from "../../assets/icons/phone-in-and-out.svg";
 import mobileLogo from "../../assets/images/mobile-logo.svg";
+import tireIcon from "../../assets/icons/tire.svg";
+import signoutIcon from "../../assets/icons/sign-out.svg";
 
 
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
@@ -71,12 +73,12 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
     if(isUserMenuOpen) {
       document.addEventListener("mousedown", handleClickOutside);
       document.addEventListener("keydown", handleKeyPress);
-    } else {
-      return () => {
-        document.removeEventListener("mousedown", handleClickOutside);
-        document.removeEventListener("keydown", handleKeyPress);
-      };
-    }
+    } 
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("keydown", handleKeyPress);
+    };
   }, [isUserMenuOpen]);
 
   return (
@@ -116,6 +118,8 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
                   className={styles.dashboard_layout_top_nav_user_menu_button} 
                   onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
                   data-testid="dashboard_user_menu_button"
+                  aria-expanded={isUserMenuOpen}
+                  aria-haspopup="menu"
                 >
                   <img src={avatar} height={48} width={48}></img>
                   <span className={styles.dashboard_layout_top_nav_user_name}>Adedeji</span>
@@ -127,46 +131,47 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
         </nav>
       </header>
 
-      <div 
-        className={`${styles.dashboard_layout_top_nav_user_menu} ${isUserMenuOpen ? styles.open : styles.closed}`} 
-        id="dashboard_layout_top_nav_user_menu"
-        data-testid="dashboard-user-menu"
-        data-state={isUserMenuOpen ? "open" : "closed"}
-      >
-        <div>
-          <div className={styles.dashboard_layout_top_nav_user_menu_profile_div}>
-            <div className={styles.dashboard_layout_top_nav_user_menu_profile_grid_div}>
-              <img src={avatar} height={28} width={28}></img>
-              <span>Adedeji</span>
+      {isUserMenuOpen && (
+        <div 
+          className={styles.dashboard_layout_top_nav_user_menu} 
+          id="dashboard_layout_top_nav_user_menu"
+          data-testid="dashboard-user-menu"
+        >
+          <div>
+            <div className={styles.dashboard_layout_top_nav_user_menu_profile_div}>
+              <div className={styles.dashboard_layout_top_nav_user_menu_profile_grid_div}>
+                <img src={avatar} height={28} width={28}></img>
+                <span>Adedeji</span>
+              </div>
+              <svg width="12" height="12" viewBox="0 0 12 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M11.3332 1L3.99984 8.33333L0.666504 5" stroke="#303030" strokeWidth="1.33333" strokeLinecap="round" strokeLinejoin="round"></path>
+              </svg>
             </div>
-            <svg width="12" height="12" viewBox="0 0 12 9" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M11.3332 1L3.99984 8.33333L0.666504 5" stroke="#303030" strokeWidth="1.33333" strokeLinecap="round" strokeLinejoin="round"></path>
-            </svg>
+
+            <a href="#" className={styles.dashboard_layout_top_nav_user_menu_org_link}>
+              <img src={homeIcon} width={16} height={16}></img>
+              <span>Organization</span>
+            </a>
           </div>
 
-          <a href="#" className={styles.dashboard_layout_top_nav_user_menu_org_link}>
-            <img src={homeIcon} width={16} height={16}></img>
-            <span>Organization</span>
-          </a>
+          <hr/>
+
+          <div>
+            <a href="#" className={styles.dashboard_layout_top_nav_user_menu_link}>Help Center</a>     
+          </div>
+
+          <hr/>
+
+          <div>
+            <a href="#" className={styles.dashboard_layout_top_nav_user_name_email_link}>
+              <span>Adedeji</span>
+              <span>adedeji@gmail.com</span>
+            </a>
+            <a href="#" className={styles.dashboard_layout_top_nav_user_menu_link}>Manage account</a>
+            <a href="#" className={styles.dashboard_layout_top_nav_user_menu_link}>Log out</a>
+          </div>
         </div>
-
-        <hr/>
-
-        <div>
-          <a href="#" className={styles.dashboard_layout_top_nav_user_menu_link}>Help Center</a>     
-        </div>
-
-        <hr/>
-
-        <div>
-          <a href="#" className={styles.dashboard_layout_top_nav_user_name_email_link}>
-            <span>Adedeji</span>
-            <span>adedeji@gmail.com</span>
-          </a>
-          <a href="#" className={styles.dashboard_layout_top_nav_user_menu_link}>Manage account</a>
-          <a href="#" className={styles.dashboard_layout_top_nav_user_menu_link}>Log out</a>
-        </div>
-      </div>
+      )}
 
       <div
         className={`${styles.dashboard_layout_backdrop} ${isSideNavOpen ? styles.dashboard_layout_backdrop_open : ""}`}
@@ -182,19 +187,21 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
           data-state={isSideNavOpen ? "open" : "closed"}
         >
           <button className={styles.switch_organization_button}>
-            <img src={briefcaseIcon} height={16} width={16}></img>
-            <span>Switch Organization</span>
-            <img src={chevronDownIcon} height={11.21} width={6.57}></img>
+            <div className={styles.switch_organization_button_div}>
+              <img src={briefcaseIcon} height={16} width={16}></img>
+              <span>Switch Organization</span>
+              <img src={chevronDownIcon} height={11.21} width={6.57}></img>
+            </div>
           </button>
 
-          <Link to="#" className={`${location.pathname === "/dashboard" ? styles.active : ""}`}>
+          <Link to="/dashboard" className={`${location.pathname === "/dashboard" ? styles.active : ""}`}>
             <img src={homeIcon} width={16} height={14.22}></img>
             <span>Dashboard</span>
           </Link>
 
           <div className={styles.dashboard_layout_side_nav_links_section}>
             <span className={styles.dashboard_layout_side_nav_links_section_heading}>CUSTOMERS</span>
-            <Link to="#">
+            <Link to="/dashboard/users" className={`${location.pathname === "/dashboard/users" ? styles.active : ""}`}>
               <img src={usersIcon} width={16} height={12.8}></img>
               <span>Users</span>
             </Link>
@@ -299,6 +306,19 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
               <img src={clipboardIcon} width={16} height={21.33}></img>
               <span>Audit Logs</span>
             </Link>
+
+            <Link to="#">
+              <img src={tireIcon} width={16} height={16}></img>
+              <span>Systems Messages</span>
+            </Link>
+          </div>
+
+          <div>
+            <button>
+              <img src={signoutIcon} width={16} height={16}></img>
+              <span>Logout</span>
+            </button>
+            <span className={styles.dashboard_layout_side_nav_version}>v1.2.0</span>
           </div>
         </nav>
         <section className={styles.dashboard_layout_content_section}>{children}</section>

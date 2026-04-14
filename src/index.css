@@ -8,7 +8,6 @@
 * {
   scrollbar-width: thin;
   scrollbar-color: silver transparent;
-  scrollbar-gutter: stable;
 }
 *::-webkit-scrollbar {
   width: 8px;

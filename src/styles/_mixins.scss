@@ -10,6 +10,11 @@
   justify-content: space-between;
 }
 
+@mixin flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
 @mixin respond($breakpoint) {
   @if $breakpoint == mobile {
     @media (max-width: 767px) {

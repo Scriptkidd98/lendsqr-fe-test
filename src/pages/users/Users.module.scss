@@ -1,0 +1,64 @@
+@use "../../styles/mixins" as *;
+
+.users_metrics_grid_div {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  align-items: center;
+  gap: 27px;
+  margin-top: 42px;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
+}
+.users_metric_card {
+  min-height: 140px;
+  box-sizing: border-box;
+  padding: 20px 30px 31px 30px;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid rgba(33, 63, 125, 0.06);
+  box-shadow: 3px 5px 20px 0px rgba(0, 0, 0, 0.04);
+  background-color: white;
+  border-radius: 4px;
+}
+.users_metric_card > div {
+  width: 40px;
+  height: 40px;
+  @include flex-center;
+  border-radius: 100%;
+}
+.users_metric_card > span:nth-of-type(1) {
+  font-family: "Work Sans", sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  text-transform: uppercase;
+  color: $primary-gray-text;
+  margin-top: 18px;
+}
+.users_metric_card > span:nth-of-type(2) {
+  font-family: "Work Sans", sans-serif;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  text-transform: uppercase;
+  color: $primary-dark-blue-text;
+  margin-top: 21px;
+}
+
+.users_metric_icon_bg_users {
+  background: #FCE8FF;
+}
+
+.users_metric_icon_bg_active_users {
+  background: #EFE8FF;
+}
+
+.users_metric_icon_bg_loans {
+  background: #FEEFED;
+}
+
+.users_metric_icon_bg_savings {
+  background: #FFEBF0;
+}
